@@ -4,7 +4,8 @@ import React from 'react'
 const App = () => {
   return (
     <View>
-      <Text>App</Text>
+      <Text style={{fontSize:40,}}>App</Text>
+      <Text style={{fontSize:40,fontFamily:"Poppins-Thin"}}>App</Text>
     </View>
   )
 }
