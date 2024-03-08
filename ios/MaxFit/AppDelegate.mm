@@ -1,6 +1,8 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+// react-native-splash-screen
+#import "RNSplashScreen.h"  // here
 
 @implementation AppDelegate
 
@@ -12,6 +14,12 @@
   self.initialProps = @{};
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  
+  // react-native-splash-screen
+  [RNSplashScreen show];  // here
+    // or
+    //[RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
+    return YES;
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
