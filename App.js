@@ -1,6 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import SplashScreen from 'react-native-splash-screen'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+import Onboarding from './components/Onboarding'
 
 
 const App = () => {
@@ -10,13 +13,12 @@ const App = () => {
     setTimeout(() => {
       // go to Home page
       SplashScreen.hide();
-    }, 2500)
+    }, 2000)
   }, [])
 
   return (
-    <View>
-      <Text style={{ fontSize: 40, }}>App</Text>
-      <Text style={{ fontSize: 40, fontFamily: "Poppins-Thin" }}>App</Text>
+    <View style={{ flex: 1,}}>
+      <Onboarding />
     </View>
   )
 }
