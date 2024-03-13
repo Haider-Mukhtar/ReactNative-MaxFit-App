@@ -59,7 +59,7 @@ const Onboarding = () => {
     }
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <Login />
         </View>
     )
