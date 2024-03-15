@@ -1,8 +1,11 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
+
+  const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1 }}>
@@ -28,7 +31,7 @@ const Login = () => {
         />
       </View>
       {/* password input field */}
-      <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', marginHorizontal: 25, borderRadius: 12, marginTop: 20 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', marginHorizontal: 25, borderRadius: 12, marginTop: 10 }}>
         <Image
           style={{ marginHorizontal: 10 }}
           source={require('../assets/icons/PasswordLogo.png')}
@@ -103,7 +106,9 @@ const Login = () => {
           <Text style={{ color: '#1D1617', fontSize: 16, fontFamily: "Poppins-Medium", }}>
             Don't have an account yet?
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Signup")}
+          >
             <Text style={{ color: '#C58BF2', fontSize: 16, fontFamily: "Poppins-Medium", }}>
               Register
             </Text>

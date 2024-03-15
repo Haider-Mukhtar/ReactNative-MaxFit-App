@@ -2,8 +2,12 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import SplashScreen from 'react-native-splash-screen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Onboarding from './components/Onboarding'
+import Signup from './components/Signup';
+import CompleteSignup from './components/CompleteSignup';
 
 
 const App = () => {
@@ -16,10 +20,16 @@ const App = () => {
     }, 2000)
   }, [])
 
+  const Stack = createStackNavigator();
+
   return (
-    <View style={{ flex: 1,}}>
-      <Onboarding />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Onboarding" component={Onboarding} options={{ headerShown: false }} />
+        <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+        <Stack.Screen name="CompleteSignup" component={CompleteSignup} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
