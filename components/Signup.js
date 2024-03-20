@@ -1,11 +1,17 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
 
 const Signup = () => {
 
     const navigation = useNavigation();
+
+    //show / hide password
+    const [showPassword, setShowPassword] = useState(false);
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -63,14 +69,24 @@ const Signup = () => {
                 <TextInput
                     placeholder='Password'
                     placeholderTextColor='#ADA4A5'
-                    secureTextEntry
+                    secureTextEntry={!showPassword}
                     style={{ backgroundColor: "#F7F8F8", color: '#1D1617', fontSize: 16, paddingRight: 10, flex: 1, borderRadius: 12, }}
                 />
-                <TouchableOpacity>
-                    <Image
-                        style={{ marginHorizontal: 10, width: 18, height: 18, opacity: 0.6 }}
-                        source={require('../assets/icons/HidePassword.png')}
-                    />
+                <TouchableOpacity onPress={toggleShowPassword}>
+                    <View>
+                        {
+                            showPassword ?
+                                <Image
+                                    style={{ marginHorizontal: 10, width: 18, height: 18, opacity: 0.6 }}
+                                    source={require('../assets/icons/ShowPassword.png')}
+                                />
+                                :
+                                <Image
+                                    style={{ marginHorizontal: 10, width: 18, height: 18, opacity: 0.6 }}
+                                    source={require('../assets/icons/HidePassword.png')}
+                                />
+                        }
+                    </View>
                 </TouchableOpacity>
             </View>
             {/* forgot password */}
