@@ -13,6 +13,7 @@ import LeanTone from './components/LeanTone';
 import LoseFat from './components/LoseFat';
 import SuccessSignup from './components/SuccessSignup';
 import Home from './components/Home';
+import MyProfile from './components/MyProfile';
 
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
         <Stack.Screen name="LoseFat" component={LoseFat} options={{ headerShown: false }} />
         <Stack.Screen name="SuccessSignup" component={SuccessSignup} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

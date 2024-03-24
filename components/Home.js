@@ -92,7 +92,7 @@ const Home = () => {
         <View style={{ marginHorizontal: 25, marginVertical: 20, }}>
           <View style={{ flexDirection: 'row', }}>
             {/* water */}
-            <View style={{ backgroundColor: '#fff', shadowOffset: 5, shadowColor: '#000', shadowRadius: 16, elevation: 5, flex: 1, marginRight: 10, borderRadius: 16, height: 350 }}>
+            <View style={{ backgroundColor: '#fff', shadowOffset: 5, shadowColor: '#000', shadowRadius: 16, elevation: 5, flex: 1, marginRight: 10, borderRadius: 16,paddingBottom:10,}}>
               <Text style={{ color: '#000', fontSize: 16, lineHeight: 30, fontFamily: "Poppins-SemiBold", marginTop: 20, marginLeft: 20, }}>
                 Water Intake
               </Text>

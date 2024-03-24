@@ -34,6 +34,7 @@ const BottomNavBar = () => {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate("MyProfile")}
                     style={{ paddingVertical: 25, }}>
                     <Image
                         source={require('../assets/icons/Profile.png')}
