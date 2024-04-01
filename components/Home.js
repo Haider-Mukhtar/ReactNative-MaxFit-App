@@ -10,7 +10,7 @@ const Home = () => {
 
   return (
     <View style={{flex:1,}}>
-      <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: '#fff' }}>
         {/* header */}
         <View style={{ marginTop: 20, marginHorizontal: 25, }}>
           <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 24, fontFamily: "Poppins-Medium", }}>
@@ -34,7 +34,7 @@ const Home = () => {
               You have a normal weight
             </Text>
             <TouchableOpacity
-              style={{ backgroundColor: '#C58BF2', alignSelf: 'flex-start', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 100, marginTop: 10, }}
+              style={{ backgroundColor: '#C58BF2', alignSelf: 'flex-start', paddingHorizontal: 20, paddingVertical: 6, borderRadius: 100, marginTop: 10, }}
             >
               <Text style={{ color: '#fff', fontSize: 16, lineHeight: 30, fontFamily: "Poppins-SemiBold", }}>
                 View More
@@ -223,6 +223,7 @@ const Home = () => {
         <View style={{ marginHorizontal: 25, marginBottom:80, }}>
           {/* Fullbody Workout cards */}
           <TouchableOpacity
+          onPress={() => navigation.navigate("FullBodyWorkout")}
             style={{ backgroundColor: '#fff', shadowOffset: 5, shadowColor: '#000', shadowRadius: 16, elevation: 5, borderRadius: 16, marginBottom: 20 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image

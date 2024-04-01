@@ -10,12 +10,14 @@ const BottomNavBar = () => {
         <View style={{ marginTop: 20, borderTopColor: '#ADA4A5', borderTopWidth: 1, }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 25, backgroundColor: '#fff', }}>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate("Home")}
                     style={{ paddingVertical: 25, }}>
                     <Image
                         source={require('../assets/icons/Home.png')}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate("Workout")}
                     style={{ paddingVertical: 25, }}>
                     <Image
                         source={require('../assets/icons/Activity.png')}

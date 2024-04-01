@@ -13,7 +13,7 @@ const MyProfile = () => {
             {/* header */}
             <View style={{ marginHorizontal: 25, marginVertical: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <TouchableOpacity
-                    onPress={() => navigation.goBack()}
+                    onPress={() => navigation.navigate("Home")}
                     style={{ backgroundColor: '#fff', borderRadius: 6, elevation: 5, height: 36, width: 36, alignItems: 'center', justifyContent: 'center' }}>
                     <Image
                         source={require('../assets/icons/ArrowLeft.png')}
@@ -31,7 +31,7 @@ const MyProfile = () => {
                     />
                 </TouchableOpacity>
             </View>
-            <ScrollView showsHorizontalScrollIndicator={false} style={{ flex: 1, backgroundColor: '#fff', }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: '#fff', }}>
                 {/* profile */}
                 <View style={{ marginHorizontal: 25, flexDirection: 'row', alignItems: 'center' }}>
                     <View>

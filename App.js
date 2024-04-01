@@ -14,6 +14,14 @@ import LoseFat from './components/LoseFat';
 import SuccessSignup from './components/SuccessSignup';
 import Home from './components/Home';
 import MyProfile from './components/MyProfile';
+import Workout from './components/Workout';
+import FullBodyWorkout from './components/FullBodyWorkout';
+import WarmUpWorkout from './components/WarmUpWorkout';
+import JumpingJackWorkout from './components/JumpingJackWorkout';
+import SkippingWorkout from './components/SkippingWorkout';
+import SquatsWorkout from './components/SquatsWorkout';
+import ArmRaisesWorkout from './components/ArmRaisesWorkout';
+import RestAndDrinkWorkout from './components/RestAndDrinkWorkout';
 
 
 const App = () => {
@@ -40,6 +48,14 @@ const App = () => {
         <Stack.Screen name="SuccessSignup" component={SuccessSignup} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
+        <Stack.Screen name="Workout" component={Workout} options={{ headerShown: false }} />
+        <Stack.Screen name="FullBodyWorkout" component={FullBodyWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="WarmUpWorkout" component={WarmUpWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="JumpingJackWorkout" component={JumpingJackWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="SkippingWorkout" component={SkippingWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="SquatsWorkout" component={SquatsWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="ArmRaisesWorkout" component={ArmRaisesWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="RestAndDrinkWorkout" component={RestAndDrinkWorkout} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
