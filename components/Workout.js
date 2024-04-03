@@ -13,7 +13,7 @@ const Workout = () => {
             {/* header */}
             <View style={{ marginHorizontal: 25, marginVertical: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("Home")}
+                    onPress={() => navigation.goBack()}
                     style={{ backgroundColor: '#fff', borderRadius: 6, elevation: 5, height: 36, width: 36, alignItems: 'center', justifyContent: 'center' }}>
                     <Image
                         source={require('../assets/icons/ArrowLeft.png')}
@@ -79,6 +79,7 @@ const Workout = () => {
                                 12 Exercises | 40mins
                             </Text>
                             <TouchableOpacity
+                                onPress={() => navigation.navigate("LowerBodyWorkout")}
                                 style={{ backgroundColor: '#fff', alignSelf: 'flex-start', borderRadius: 100, paddingVertical: 10, paddingHorizontal: 20, marginTop: 10, }}>
                                 <Text style={{ color: '#92A3FD', fontSize: 18, fontFamily: "Poppins-Medium", }}>
                                     View More
@@ -102,6 +103,7 @@ const Workout = () => {
                                 14 Exercises | 20mins
                             </Text>
                             <TouchableOpacity
+                                onPress={() => navigation.navigate("ABWorkout")}
                                 style={{ backgroundColor: '#fff', alignSelf: 'flex-start', borderRadius: 100, paddingVertical: 10, paddingHorizontal: 20, marginTop: 10, }}>
                                 <Text style={{ color: '#92A3FD', fontSize: 18, fontFamily: "Poppins-Medium", }}>
                                     View More

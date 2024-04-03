@@ -140,7 +140,8 @@ const MyProfile = () => {
                                 </View>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate("Workout")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}

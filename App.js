@@ -22,6 +22,16 @@ import SkippingWorkout from './components/SkippingWorkout';
 import SquatsWorkout from './components/SquatsWorkout';
 import ArmRaisesWorkout from './components/ArmRaisesWorkout';
 import RestAndDrinkWorkout from './components/RestAndDrinkWorkout';
+import LowerBodyWorkout from './components/LowerBodyWorkout';
+import LungesWorkout from './components/LungesWorkout';
+import GluteBridgeWorkout from './components/GluteBridgeWorkout';
+import CalfRaisesWorkout from './components/CalfRaisesWorkout';
+import ABWorkout from './components/ABWorkout';
+import CrunchesWorkout from './components/CrunchesWorkout';
+import PlankWorkout from './components/PlankWorkout';
+import RussianTwistsWorkout from './components/RussianTwistsWorkout';
+import LegRaisesWorkout from './components/LegRaisesWorkout';
+import BicycleCrunchesWorkout from './components/BicycleCrunchesWorkout';
 
 
 const App = () => {
@@ -56,6 +66,16 @@ const App = () => {
         <Stack.Screen name="SquatsWorkout" component={SquatsWorkout} options={{ headerShown: false }} />
         <Stack.Screen name="ArmRaisesWorkout" component={ArmRaisesWorkout} options={{ headerShown: false }} />
         <Stack.Screen name="RestAndDrinkWorkout" component={RestAndDrinkWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="LowerBodyWorkout" component={LowerBodyWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="LungesWorkout" component={LungesWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="GluteBridgeWorkout" component={GluteBridgeWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="CalfRaisesWorkout" component={CalfRaisesWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="ABWorkout" component={ABWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="CrunchesWorkout" component={CrunchesWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="PlankWorkout" component={PlankWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="RussianTwistsWorkout" component={RussianTwistsWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="LegRaisesWorkout" component={LegRaisesWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="BicycleCrunchesWorkout" component={BicycleCrunchesWorkout} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

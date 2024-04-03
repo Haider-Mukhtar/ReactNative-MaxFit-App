@@ -9,7 +9,7 @@ const Home = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={{flex:1,}}>
+    <View style={{ flex: 1, }}>
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: '#fff' }}>
         {/* header */}
         <View style={{ marginTop: 20, marginHorizontal: 25, }}>
@@ -92,7 +92,7 @@ const Home = () => {
         <View style={{ marginHorizontal: 25, marginVertical: 20, }}>
           <View style={{ flexDirection: 'row', }}>
             {/* water */}
-            <View style={{ backgroundColor: '#fff', shadowOffset: 5, shadowColor: '#000', shadowRadius: 16, elevation: 5, flex: 1, marginRight: 10, borderRadius: 16,paddingBottom:10,}}>
+            <View style={{ backgroundColor: '#fff', shadowOffset: 5, shadowColor: '#000', shadowRadius: 16, elevation: 5, flex: 1, marginRight: 10, borderRadius: 16, paddingBottom: 10, }}>
               <Text style={{ color: '#000', fontSize: 16, lineHeight: 30, fontFamily: "Poppins-SemiBold", marginTop: 20, marginLeft: 20, }}>
                 Water Intake
               </Text>
@@ -220,10 +220,10 @@ const Home = () => {
           </TouchableOpacity>
         </View>
         {/* Latest Workout cards */}
-        <View style={{ marginHorizontal: 25, marginBottom:80, }}>
+        <View style={{ marginHorizontal: 25, marginBottom: 80, }}>
           {/* Fullbody Workout cards */}
           <TouchableOpacity
-          onPress={() => navigation.navigate("FullBodyWorkout")}
+            onPress={() => navigation.navigate("FullBodyWorkout")}
             style={{ backgroundColor: '#fff', shadowOffset: 5, shadowColor: '#000', shadowRadius: 16, elevation: 5, borderRadius: 16, marginBottom: 20 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
@@ -249,6 +249,7 @@ const Home = () => {
           </TouchableOpacity>
           {/* Lowerbody Workout cards */}
           <TouchableOpacity
+            onPress={() => navigation.navigate("LowerBodyWorkout")}
             style={{ backgroundColor: '#fff', shadowOffset: 5, shadowColor: '#000', shadowRadius: 16, elevation: 5, borderRadius: 16, marginBottom: 20 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
@@ -274,6 +275,7 @@ const Home = () => {
           </TouchableOpacity>
           {/* Ab Workout cards */}
           <TouchableOpacity
+            onPress={() => navigation.navigate("ABWorkout")}
             style={{ backgroundColor: '#fff', shadowOffset: 5, shadowColor: '#000', shadowRadius: 16, elevation: 5, borderRadius: 16, marginBottom: 20 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
@@ -300,7 +302,7 @@ const Home = () => {
         </View>
       </ScrollView>
       {/* bottom nav bar */}
-      <View style={{ position: 'absolute', bottom: 0, width:'100%' ,}}>
+      <View style={{ position: 'absolute', bottom: 0, width: '100%', }}>
         <BottomNavBar />
       </View>
     </View>
