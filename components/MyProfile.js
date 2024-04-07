@@ -141,7 +141,7 @@ const MyProfile = () => {
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
-                        onPress={() => navigation.navigate("Workout")}>
+                            onPress={() => navigation.navigate("Workout")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}
@@ -166,7 +166,8 @@ const MyProfile = () => {
                         <Text style={{ color: '#1D1617', fontSize: 20, fontFamily: "Poppins-Bold", }}>
                             Other
                         </Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("ContactUs")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}
@@ -183,7 +184,8 @@ const MyProfile = () => {
                                 </View>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("PrivacyPolicy")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}

@@ -32,6 +32,8 @@ import PlankWorkout from './components/PlankWorkout';
 import RussianTwistsWorkout from './components/RussianTwistsWorkout';
 import LegRaisesWorkout from './components/LegRaisesWorkout';
 import BicycleCrunchesWorkout from './components/BicycleCrunchesWorkout';
+import ContactUs from './components/ContactUs';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 
 const App = () => {
@@ -76,6 +78,8 @@ const App = () => {
         <Stack.Screen name="RussianTwistsWorkout" component={RussianTwistsWorkout} options={{ headerShown: false }} />
         <Stack.Screen name="LegRaisesWorkout" component={LegRaisesWorkout} options={{ headerShown: false }} />
         <Stack.Screen name="BicycleCrunchesWorkout" component={BicycleCrunchesWorkout} options={{ headerShown: false }} />
+        <Stack.Screen name="ContactUs" component={ContactUs} options={{ headerShown: false }} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
