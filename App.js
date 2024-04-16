@@ -44,7 +44,7 @@ const App = () => {
   //splash screen
   useEffect(() => {
     setTimeout(() => {
-      // go to Home page
+      // go to Home page , splash screen close
       SplashScreen.hide();
     }, 2000)
   }, [])
