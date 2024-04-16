@@ -34,6 +34,9 @@ import LegRaisesWorkout from './components/LegRaisesWorkout';
 import BicycleCrunchesWorkout from './components/BicycleCrunchesWorkout';
 import ContactUs from './components/ContactUs';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import Setting from './components/Setting';
+import Achievement from './components/Achievement';
+import BMICalculator from './components/BMICalculator';
 
 
 const App = () => {
@@ -80,6 +83,9 @@ const App = () => {
         <Stack.Screen name="BicycleCrunchesWorkout" component={BicycleCrunchesWorkout} options={{ headerShown: false }} />
         <Stack.Screen name="ContactUs" component={ContactUs} options={{ headerShown: false }} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{ headerShown: false }} />
+        <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
+        <Stack.Screen name="Achievement" component={Achievement} options={{ headerShown: false }} />
+        <Stack.Screen name="BMICalculator" component={BMICalculator} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

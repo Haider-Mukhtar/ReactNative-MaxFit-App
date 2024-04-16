@@ -106,7 +106,8 @@ const MyProfile = () => {
                                 </View>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate("Achievement")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}
@@ -202,7 +203,8 @@ const MyProfile = () => {
                                 </View>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate("Setting")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}

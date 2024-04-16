@@ -34,6 +34,7 @@ const Home = () => {
               You have a normal weight
             </Text>
             <TouchableOpacity
+              onPress={() => navigation.navigate("BMICalculator")}
               style={{ backgroundColor: '#C58BF2', alignSelf: 'flex-start', paddingHorizontal: 20, paddingVertical: 6, borderRadius: 100, marginTop: 10, }}
             >
               <Text style={{ color: '#fff', fontSize: 16, lineHeight: 30, fontFamily: "Poppins-SemiBold", }}>

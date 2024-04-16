@@ -12,7 +12,7 @@ const ContactUs = () => {
     //onPress phone btn
     const phoneCallBtn = () => {
         const args = {
-            number: '+92 301 1234567',
+            number: '+92 312 4771713',
             prompt: false,
             skipCanOpen: true
         }
@@ -52,9 +52,9 @@ const ContactUs = () => {
                 </TouchableOpacity>
             </View>
             {/* logo */}
-            <View style={{ justifyContent:'center', alignItems:'center', marginTop:10,}}>
-                <Image 
-                    style={{width:210, height:200}}
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 10, }}>
+                <Image
+                    style={{ width: 210, height: 200 }}
                     source={require('../assets/mainAssets/MaxFitLogo.png')}
                 />
             </View>
@@ -74,7 +74,7 @@ const ContactUs = () => {
                         onPress={phoneCallBtn}>
                         <View style={{ flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 20, alignItems: 'center' }}>
                             <Text style={{ color: '#fff', fontSize: 20, fontWeight: '400', fontFamily: 'Poppins-SemiBold' }}>
-                                +92 301 1234567
+                                +92 312 4771713
                             </Text>
                         </View>
                     </TouchableOpacity>
