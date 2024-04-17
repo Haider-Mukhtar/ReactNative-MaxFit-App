@@ -2,10 +2,61 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'reac
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const CompleteSignup = () => {
 
     const navigation = useNavigation();
+
+    //get data from user
+    const [selectedGender, setSelectedGender] = useState(null);
+    const [dOB, setDOB] = useState('')
+    const [weight, setWeight] = useState('');
+    const [height, setHeight] = useState('');
+
+    //data validation errors
+    const [selectedGenderError, setSelectedGenderError] = useState(false);
+    const [dateOfBirthError, setDateOfBirthError] = useState(false);
+    const [weightError, setWeightError] = useState(false);
+    const [heightError, setHeightError] = useState(false);
+
+    //data validation & move to next page
+    const nextBtn = async () => {
+        //data validation
+        { !selectedGender ? setSelectedGenderError(true) : setSelectedGenderError(false) }
+        { !dOB ? setDateOfBirthError(true) : setDateOfBirthError(false) }
+        { !weight ? setWeightError(true) : setWeightError(false) }
+        { !height ? setHeightError(true) : setHeightError(false) }
+        if (!selectedGender || !dateOfBirth || !weight || !height) { return; }
+        //move to next page 
+        navigation.navigate("ImproveShape")
+    }
+
+    //gender selection
+    const handleGenderPress = (gender) => {
+        setSelectedGender(gender);
+    };
+    // console.log(selectedGender)
+
+    //DOF picker
+    const [dateOfBirth, setDateOfBirth] = useState('Date of Birth');
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+    const handleConfirm = (date) => {
+        // console.warn("A date has been picked: ", date);
+        const dt = new Date(date);
+        const x = dt.toISOString().split('T');
+        const x1 = x[0].split('-');
+        // console.log(x1[2] + '/' + x1[1] + '/' + x1[0])
+        setDateOfBirth(x1[2] + '/' + x1[1] + '/' + x1[0])
+        setDOB(x1[2] + '/' + x1[1] + '/' + x1[0])
+        hideDatePicker();
+    };
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -25,43 +76,61 @@ const CompleteSignup = () => {
                     It will help us to know more about you!
                 </Text>
             </View>
+
             {/* gender selection */}
             <View style={{ marginHorizontal: 25, marginTop: 30, }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', borderRadius: 12, paddingVertical: 14, }}>
-                    <Image
-                        style={{ marginHorizontal: 10 }}
-                        source={require('../assets/icons/2User.png')}
-                    />
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 20, }}>
                     <TouchableOpacity
-                        style={{ flex: 1, }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginRight: 12, }}>
-                            <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 24, fontFamily: "Poppins-Medium", }}>
-                                Chose Gender
-                            </Text>
+                        onPress={() => handleGenderPress('Male')}
+                        style={{ backgroundColor: selectedGender === 'Male' ? '#C58BF2' : '#F7F8F8', justifyContent: 'center', alignItems: 'center', paddingVertical: 14, borderRadius: 12, flex: 1 }}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image
-                                source={require('../assets/icons/ArrowDown.png')}
+                                style={{ marginHorizontal: 10, tintColor: selectedGender === 'Male' ? '#fff' : '#7B6F72' }}
+                                source={require('../assets/icons/2User.png')}
                             />
+                            <Text style={{ color: selectedGender === 'Male' ? '#fff' : '#ADA4A5', fontSize: 16, lineHeight: 24, fontFamily: "Poppins-Medium", }}>
+                                Male
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => handleGenderPress('Female')}
+                        style={{ backgroundColor: selectedGender === 'Female' ? '#C58BF2' : '#F7F8F8', justifyContent: 'center', alignItems: 'center', paddingVertical: 14, borderRadius: 12, flex: 1 }}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                                style={{ marginHorizontal: 10, tintColor: selectedGender === 'Female' ? '#fff' : '#7B6F72' }}
+                                source={require('../assets/icons/2User.png')}
+                            />
+                            <Text style={{ color: selectedGender === 'Female' ? '#fff' : '#ADA4A5', fontSize: 16, lineHeight: 24, fontFamily: "Poppins-Medium", }}>
+                                Female
+                            </Text>
                         </View>
                     </TouchableOpacity>
                 </View>
             </View>
+            {selectedGenderError ? <Text style={styles.error}>Please select your gender.</Text> : null}
             {/* DOB selection */}
             <View style={{ marginHorizontal: 25, marginTop: 10, }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', borderRadius: 12, paddingVertical: 14, }}>
+                <TouchableOpacity
+                    onPress={showDatePicker}
+                    style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', borderRadius: 12, paddingVertical: 14, }}>
                     <Image
                         style={{ marginHorizontal: 10 }}
                         source={require('../assets/icons/DOBLogo.png')}
                     />
-                    <TouchableOpacity
+                    <View
                         style={{ flex: 1, }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginRight: 12, }}>
                             <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 24, fontFamily: "Poppins-Medium", }}>
-                                Date of Birth
+                                {dateOfBirth}
                             </Text>
                         </View>
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
             </View>
+            {dateOfBirthError ? <Text style={styles.error}>Please select your date of birth.</Text> : null}
             {/*  Weight selection */}
             <View style={{ marginHorizontal: 25, marginTop: 10, flexDirection: 'row', gap: 10 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', borderRadius: 12, flex: 1 }}>
@@ -70,6 +139,9 @@ const CompleteSignup = () => {
                         source={require('../assets/icons/WeightLogo.png')}
                     />
                     <TextInput
+                        value={weight}
+                        onChangeText={txt => setWeight(txt)}
+                        keyboardType='numeric'
                         placeholder='Your Weight'
                         placeholderTextColor='#ADA4A5'
                         style={{ backgroundColor: "#F7F8F8", color: '#1D1617', fontSize: 16, paddingRight: 10, flex: 1, borderRadius: 12, }}
@@ -81,6 +153,7 @@ const CompleteSignup = () => {
                     </Text>
                 </View>
             </View>
+            {weightError ? <Text style={styles.error}>Please enter your weight.</Text> : null}
             {/*   Height selection */}
             <View style={{ marginHorizontal: 25, marginTop: 10, flexDirection: 'row', gap: 10 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', borderRadius: 12, flex: 1 }}>
@@ -89,6 +162,9 @@ const CompleteSignup = () => {
                         source={require('../assets/icons/HeightLogo.png')}
                     />
                     <TextInput
+                        value={height}
+                        onChangeText={txt => setHeight(txt)}
+                        keyboardType='numeric'
                         placeholder='Your Height'
                         placeholderTextColor='#ADA4A5'
                         style={{ backgroundColor: "#F7F8F8", color: '#1D1617', fontSize: 16, paddingRight: 10, flex: 1, borderRadius: 12, }}
@@ -100,10 +176,11 @@ const CompleteSignup = () => {
                     </Text>
                 </View>
             </View>
+            {heightError ? <Text style={styles.error}>Please enter your height.</Text> : null}
             {/*   Next btn */}
-            <View style={{ marginHorizontal: 25, marginVertical: 30, }}>
+            <View style={{ marginHorizontal: 25, marginTop: 10, }}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("ImproveShape")}
+                    onPress={nextBtn}
                     style={{ backgroundColor: '#92A3FD', paddingVertical: 16, borderRadius: 100 }}
                 >
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
@@ -116,10 +193,24 @@ const CompleteSignup = () => {
                     </View>
                 </TouchableOpacity>
             </View>
+            {/*   DOB Modal */}
+            <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+            />
         </View>
     )
 }
 
 export default CompleteSignup
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    error: {
+        color: 'red',
+        marginLeft: 25,
+        marginTop: 1,
+        fontFamily: 'Poppins-Light'
+    },
+})

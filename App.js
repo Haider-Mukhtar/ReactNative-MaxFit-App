@@ -37,6 +37,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import Setting from './components/Setting';
 import Achievement from './components/Achievement';
 import BMICalculator from './components/BMICalculator';
+import PrivacyPolicySignUp from './components/PrivacyPolicySignUp';
 
 
 const App = () => {
@@ -86,6 +87,7 @@ const App = () => {
         <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
         <Stack.Screen name="Achievement" component={Achievement} options={{ headerShown: false }} />
         <Stack.Screen name="BMICalculator" component={BMICalculator} options={{ headerShown: false }} />
+        <Stack.Screen name="PrivacyPolicySignUp" component={PrivacyPolicySignUp} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -1,7 +1,9 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
+
+import uuid from 'react-native-uuid'
 
 const Signup = () => {
 
@@ -12,6 +14,63 @@ const Signup = () => {
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
+
+    //get data from user
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    //clear data
+    const clearData = () => {
+        setFirstName(''), setLastName(''), setEmail(''), setPassword('')
+    }
+
+    //data validation errors
+    const [firstNameError, setFirstNameError] = useState(false);
+    const [lastNameError, setLastNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+
+    //data validation & move to next page
+    const signUpBtn = async () => {
+        //data validation
+        { !firstName ? setFirstNameError(true) : setFirstNameError(false) }
+        { !lastName ? setLastNameError(true) : setLastNameError(false) }
+        { !email ? setEmailError(true) : setEmailError(false) }
+        { !password ? setPasswordError(true) : setPasswordError(false) }
+        if (!firstName || !lastName || !email || !password) { return; }
+        //move to next page 
+        const userId = uuid.v4()
+        navigation.navigate('CompleteSignup')
+        // firestore().collection('users').doc(userId).set({
+        //     userId: userId,
+        //     firstName: firstName,
+        //     lastName: lastName,
+        //     email: email,
+        //     password: password,
+        // bookmarks: [],
+        // phone: "",
+        // about: "",
+        // facebook: "",
+        // instagram: "",
+        // linkedin: "",
+        // followers: [],
+        // following: [],
+        // intrest: [],
+        // profileImage: "",
+        // })
+        //     .then(
+        //         res => {
+        //             Alert.alert('New User', 'New User created successfully.', [
+        //                 { text: 'OK', onPress: () => navigation.navigate("Verification") },
+        //             ]);
+        //         }
+        //     )
+        //     .catch(err => {
+        //         alert(err)
+        //     });
+    }
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -31,11 +90,14 @@ const Signup = () => {
                     source={require('../assets/icons/ProfileLogo.png')}
                 />
                 <TextInput
+                    value={firstName}
+                    onChangeText={txt => setFirstName(txt)}
                     placeholder='First Name'
                     placeholderTextColor='#ADA4A5'
                     style={{ backgroundColor: "#F7F8F8", color: '#1D1617', fontSize: 16, paddingRight: 10, flex: 1, borderRadius: 12, }}
                 />
             </View>
+            {firstNameError ? <Text style={styles.error}>Please enter your first name.</Text> : null}
             {/* Last Name input field */}
             <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', marginHorizontal: 25, borderRadius: 12, marginTop: 10 }}>
                 <Image
@@ -43,11 +105,14 @@ const Signup = () => {
                     source={require('../assets/icons/ProfileLogo.png')}
                 />
                 <TextInput
+                    value={lastName}
+                    onChangeText={txt => setLastName(txt)}
                     placeholder='Last Name'
                     placeholderTextColor='#ADA4A5'
                     style={{ backgroundColor: "#F7F8F8", color: '#1D1617', fontSize: 16, paddingRight: 10, flex: 1, borderRadius: 12, }}
                 />
             </View>
+            {lastNameError ? <Text style={styles.error}>Please enter your last name.</Text> : null}
             {/* Email input field */}
             <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', marginHorizontal: 25, borderRadius: 12, marginTop: 10 }}>
                 <Image
@@ -55,11 +120,14 @@ const Signup = () => {
                     source={require('../assets/icons/EmainLogo.png')}
                 />
                 <TextInput
+                    value={email}
+                    onChangeText={txt => setEmail(txt)}
                     placeholder='Email'
                     placeholderTextColor='#ADA4A5'
                     style={{ backgroundColor: "#F7F8F8", color: '#1D1617', fontSize: 16, paddingRight: 10, flex: 1, borderRadius: 12, }}
                 />
             </View>
+            {emailError ? <Text style={styles.error}>Please enter your email.</Text> : null}
             {/* password input field */}
             <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', marginHorizontal: 25, borderRadius: 12, marginTop: 10 }}>
                 <Image
@@ -67,6 +135,8 @@ const Signup = () => {
                     source={require('../assets/icons/PasswordLogo.png')}
                 />
                 <TextInput
+                    value={password}
+                    onChangeText={txt => setPassword(txt)}
                     placeholder='Password'
                     placeholderTextColor='#ADA4A5'
                     secureTextEntry={!showPassword}
@@ -89,28 +159,31 @@ const Signup = () => {
                     </View>
                 </TouchableOpacity>
             </View>
+            {passwordError ? <Text style={styles.error}>Please enter your password.</Text> : null}
             {/* forgot password */}
             <View style={{ marginTop: 16, flexDirection: 'row', gap: 8, marginHorizontal: 25 }}>
-                <TouchableOpacity
-                    style={{ width: 18, height: 18, marginTop: 5, borderWidth: 1, borderColor: '#ADA4A5', borderRadius: 4, }}>
-
-                </TouchableOpacity>
                 <View>
                     <View style={{ flexDirection: 'row', gap: 4 }}>
                         <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 36, fontFamily: "Poppins-Medium", }}>
                             By continuing you accept our
                         </Text>
-                        <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 36, fontFamily: "Poppins-Medium", textDecorationLine: 'underline' }}>
-                            Privacy Policy
-                        </Text>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('PrivacyPolicySignUp')}>
+                            <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 36, fontFamily: "Poppins-Medium", textDecorationLine: 'underline' }}>
+                                Privacy Policy
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{ flexDirection: 'row', gap: 4 }}>
                         <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 36, fontFamily: "Poppins-Medium", }}>
                             and
                         </Text>
-                        <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 36, fontFamily: "Poppins-Medium", textDecorationLine: 'underline' }}>
-                            Term of Use
-                        </Text>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('PrivacyPolicySignUp')}>
+                            <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 36, fontFamily: "Poppins-Medium", textDecorationLine: 'underline' }}>
+                                Term of Use
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -120,7 +193,8 @@ const Signup = () => {
                 <View style={{ marginHorizontal: 25 }}>
                     <TouchableOpacity
                         style={{ backgroundColor: '#92A3FD', paddingVertical: 16, borderRadius: 100, justifyContent: 'center', alignItems: 'center' }}
-                        onPress={() => navigation.navigate("CompleteSignup")}
+                        onPress={signUpBtn}
+                        // onPress={() => navigation.navigate('CompleteSignup')}
                     >
                         <Text style={{ color: '#fff', fontSize: 20, lineHeight: 24, fontFamily: "Poppins-Bold", }}>
                             Register
@@ -174,4 +248,11 @@ const Signup = () => {
 
 export default Signup
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    error: {
+        color: 'red',
+        marginLeft: 25,
+        marginTop: 1,
+        fontFamily: 'Poppins-Light'
+    },
+})
