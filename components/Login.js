@@ -1,11 +1,16 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, KeyboardAvoidingView, Alert } from 'react-native'
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
+import Loading from './Loading';
 
 const Login = () => {
 
   const navigation = useNavigation();
+
+  //activity loader
+  const [visible, setVisible] = useState(false);
 
   //show / hide password
   const [showPassword, setShowPassword] = useState(false);
@@ -13,8 +18,52 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  //get input data 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  //error
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  //validarion & login
+  const loginBtn = async () => {
+    { !email ? setEmailError(true) : setEmailError(false) }
+    { !password ? setPasswordError(true) : setPasswordError(false) }
+    if (!email || !password) { return; }
+    setVisible(true)
+    //firebase
+    firestore().collection('users').where('email', '==', email).get()
+      .then(
+        res => {
+          // console.log(JSON.stringify(res.docs[0].data()));
+          if (res.docs[0].data().password == password) {
+            loginData(res.docs[0].data().name, res.docs[0].data().email, res.docs[0].data().userId);
+          } else {
+            setVisible(false)
+            Alert.alert('Login Fail', 'Password not match with entered Email. Try Again', [
+              { text: 'OK', onPress: () => { } },
+            ]);
+          }
+        })
+      .catch(err => {
+        setVisible(false)
+        Alert.alert('404 Not Found', 'Sorry! User not found. Try Again', [
+          { text: 'OK', onPress: () => { } },
+        ]);
+      })
+  }
+  //save login data in Async storage
+  const loginData = async (name, email, userId) => {
+    await AsyncStorage.setItem('USERID', userId);
+    setVisible(false)
+    setEmail('')
+    setPassword('')
+    navigation.navigate("Home")
+  }
+
   return (
-    <View style={{ flex: 1, backgroundColor:'#fff' }}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       {/* header */}
       <View style={{ marginTop: 50 }}>
         <Text style={{ color: '#1D1617', fontSize: 20, lineHeight: 24, fontFamily: "Poppins-Medium", textAlign: 'center' }}>
@@ -31,11 +80,14 @@ const Login = () => {
           source={require('../assets/icons/EmainLogo.png')}
         />
         <TextInput
+          value={email}
+          onChangeText={txt => setEmail(txt)}
           placeholder='Email'
           placeholderTextColor='#ADA4A5'
           style={{ backgroundColor: "#F7F8F8", color: '#1D1617', fontSize: 16, paddingRight: 10, flex: 1, borderRadius: 12, }}
         />
       </View>
+      {emailError ? <Text style={styles.error}>Please enter email.</Text> : null}
       {/* password input field */}
       <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', marginHorizontal: 25, borderRadius: 12, marginTop: 10 }}>
         <Image
@@ -43,6 +95,8 @@ const Login = () => {
           source={require('../assets/icons/PasswordLogo.png')}
         />
         <TextInput
+          value={password}
+          onChangeText={txt => setPassword(txt)}
           placeholder='Password'
           placeholderTextColor='#ADA4A5'
           secureTextEntry={!showPassword}
@@ -65,6 +119,7 @@ const Login = () => {
           </View>
         </TouchableOpacity>
       </View>
+      {passwordError ? <Text style={styles.error}>Please enter password.</Text> : null}
       {/* forgot password */}
       <View style={{ marginTop: 16 }}>
         <TouchableOpacity>
@@ -78,7 +133,7 @@ const Login = () => {
         {/* login button */}
         <View style={{ marginHorizontal: 25 }}>
           <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
+            onPress={loginBtn}
             style={{ backgroundColor: '#92A3FD', paddingVertical: 14, borderRadius: 100 }}
           >
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
@@ -132,10 +187,19 @@ const Login = () => {
           </TouchableOpacity>
         </View>
       </View>
+      {/* activity loader */}
+      <Loading visible={visible} />
     </View>
   )
 }
 
 export default Login
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  error: {
+    color: 'red',
+    marginLeft: 25,
+    marginTop: 1,
+    fontFamily: 'Poppins-Light'
+  },
+})

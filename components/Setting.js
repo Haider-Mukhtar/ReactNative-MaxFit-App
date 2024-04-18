@@ -7,6 +7,12 @@ const Setting = () => {
 
     const navigation = useNavigation();
 
+    //remove login data from async storage on Sign out
+    const removeLoginData = async () => {
+        await AsyncStorage.clear()
+        navigation.navigate("Onboarding")
+    }
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff', }}>
             {/* header */}
@@ -48,7 +54,7 @@ const Setting = () => {
                     </View>
                     {/* log out btn */}
                     <TouchableOpacity
-                        onPress={() => { }}
+                        onPress={removeLoginData}
                         style={{ backgroundColor: '#fff', borderRadius: 6, elevation: 5, alignItems: 'center', justifyContent: 'center', paddingVertical: 16, shadowColor: 'red', marginTop: 10 }}>
                         <Text style={{ color: 'red', fontSize: 24, fontFamily: "Poppins-Bold", textAlign: 'center' }}>
                             Log Out
@@ -56,7 +62,7 @@ const Setting = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{marginBottom:10,}}>
+            <View style={{ marginBottom: 10, }}>
                 <Text style={{ color: '#7B6F72', fontSize: 18, fontFamily: "Poppins-Medium", textAlign: 'center' }}>
                     MaxFit v 0.1.5
                 </Text>

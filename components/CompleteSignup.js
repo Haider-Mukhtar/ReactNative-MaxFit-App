@@ -1,18 +1,32 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import firestore from '@react-native-firebase/firestore';
+import Loading from './Loading';
 
-const CompleteSignup = () => {
+const CompleteSignup = ({ route }) => {
 
     const navigation = useNavigation();
+
+    //activity loader
+    const [visible, setVisible] = useState(false);
+
+    //user id
+    const { userId } = route.params;
+    // console.log(userId)
 
     //get data from user
     const [selectedGender, setSelectedGender] = useState(null);
     const [dOB, setDOB] = useState('')
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
+
+    //clear data
+    const clearData = () => {
+        setSelectedGender(''), setDOB(''), setWeight(''), setHeight('')
+    }
 
     //data validation errors
     const [selectedGenderError, setSelectedGenderError] = useState(false);
@@ -29,7 +43,26 @@ const CompleteSignup = () => {
         { !height ? setHeightError(true) : setHeightError(false) }
         if (!selectedGender || !dateOfBirth || !weight || !height) { return; }
         //move to next page 
-        navigation.navigate("ImproveShape")
+        // navigation.navigate("ImproveShape")
+        setVisible(true)
+        firestore().collection('users').doc(userId).update({
+            gender: selectedGender,
+            dateOfBirth: dOB,
+            weight: weight,
+            height: height,
+        })
+            .then(
+                res => {
+                    setVisible(false)
+                    clearData()
+                    Alert.alert('User Info.', 'User information added successfully.', [
+                        { text: 'OK', onPress: () => navigation.navigate("ImproveShape", { userId }) },
+                    ]);
+                }
+            )
+            .catch(err => {
+                alert(err)
+            });
     }
 
     //gender selection
@@ -200,6 +233,8 @@ const CompleteSignup = () => {
                 onConfirm={handleConfirm}
                 onCancel={hideDatePicker}
             />
+            {/* activity loader */}
+            <Loading visible={visible} />
         </View>
     )
 }

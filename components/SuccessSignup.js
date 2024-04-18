@@ -22,7 +22,7 @@ const SuccessSignup = () => {
                         Welcome, Stefani
                     </Text>
                     <Text style={{ color: '#7B6F72', fontSize: 16, lineHeight: 24, fontFamily: "Poppins-Medium", textAlign: 'center', marginHorizontal: 60, }}>
-                        You are all set now, let's reach your goals together with us
+                        You are all set now, let's reach your goals together with us.
                     </Text>
                 </View>
             </View>
@@ -30,12 +30,12 @@ const SuccessSignup = () => {
                 {/* go to home btn */}
                 <View style={{ marginHorizontal: 25, marginVertical: 50, }}>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate("SuccessSignup")}
+                        onPress={() => navigation.navigate("Onboarding")}
                         style={{ backgroundColor: '#92A3FD', paddingVertical: 16, borderRadius: 100 }}
                     >
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
                             <Text style={{ color: '#fff', fontSize: 20, lineHeight: 24, fontFamily: "Poppins-Bold", }}>
-                                Go To Home
+                                Go To Login
                             </Text>
                         </View>
                     </TouchableOpacity>

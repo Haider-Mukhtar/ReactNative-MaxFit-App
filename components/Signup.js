@@ -2,12 +2,16 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Alert } fro
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
-
+import firestore from '@react-native-firebase/firestore';
 import uuid from 'react-native-uuid'
+import Loading from './Loading';
 
-const Signup = () => {
+const Signup = (props) => {
 
     const navigation = useNavigation();
+
+    //activity loader
+    const [visible, setVisible] = useState(false);
 
     //show / hide password
     const [showPassword, setShowPassword] = useState(false);
@@ -41,35 +45,36 @@ const Signup = () => {
         { !password ? setPasswordError(true) : setPasswordError(false) }
         if (!firstName || !lastName || !email || !password) { return; }
         //move to next page 
+        setVisible(true)
         const userId = uuid.v4()
-        navigation.navigate('CompleteSignup')
-        // firestore().collection('users').doc(userId).set({
-        //     userId: userId,
-        //     firstName: firstName,
-        //     lastName: lastName,
-        //     email: email,
-        //     password: password,
-        // bookmarks: [],
-        // phone: "",
-        // about: "",
-        // facebook: "",
-        // instagram: "",
-        // linkedin: "",
-        // followers: [],
-        // following: [],
-        // intrest: [],
-        // profileImage: "",
-        // })
-        //     .then(
-        //         res => {
-        //             Alert.alert('New User', 'New User created successfully.', [
-        //                 { text: 'OK', onPress: () => navigation.navigate("Verification") },
-        //             ]);
-        //         }
-        //     )
-        //     .catch(err => {
-        //         alert(err)
-        //     });
+        // navigation.navigate('CompleteSignup')
+        firestore().collection('users').doc(userId).set({
+            userId: userId,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            gender: "",
+            dateOfBirth: "",
+            weight: "",
+            height: "",
+            // followers: [],
+            // following: [],
+            // intrest: [],
+            // profileImage: "",
+        })
+            .then(
+                res => {
+                    setVisible(false)
+                    clearData()
+                    Alert.alert('New User', 'New User created successfully.', [
+                        { text: 'OK', onPress: () => navigation.navigate("CompleteSignup", { userId }) },
+                    ]);
+                }
+            )
+            .catch(err => {
+                alert(err)
+            });
     }
 
     return (
@@ -194,7 +199,7 @@ const Signup = () => {
                     <TouchableOpacity
                         style={{ backgroundColor: '#92A3FD', paddingVertical: 16, borderRadius: 100, justifyContent: 'center', alignItems: 'center' }}
                         onPress={signUpBtn}
-                        // onPress={() => navigation.navigate('CompleteSignup')}
+                    // onPress={() => navigation.navigate('CompleteSignup')}
                     >
                         <Text style={{ color: '#fff', fontSize: 20, lineHeight: 24, fontFamily: "Poppins-Bold", }}>
                             Register
@@ -242,6 +247,8 @@ const Signup = () => {
                     </TouchableOpacity>
                 </View>
             </View>
+            {/* activity loader */}
+            <Loading visible={visible} />
         </View>
     )
 }
