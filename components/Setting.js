@@ -55,7 +55,7 @@ const Setting = () => {
                     {/* log out btn */}
                     <TouchableOpacity
                         onPress={removeLoginData}
-                        style={{ backgroundColor: '#fff', borderRadius: 6, elevation: 5, alignItems: 'center', justifyContent: 'center', paddingVertical: 16, shadowColor: 'red', marginTop: 10 }}>
+                        style={{ backgroundColor: '#fff', borderRadius: 6, elevation: 5, alignItems: 'center', justifyContent: 'center', paddingVertical: 16, shadowColor: 'red', marginTop: 10, borderWidth: 1, borderColor: 'red' }}>
                         <Text style={{ color: 'red', fontSize: 24, fontFamily: "Poppins-Bold", textAlign: 'center' }}>
                             Log Out
                         </Text>

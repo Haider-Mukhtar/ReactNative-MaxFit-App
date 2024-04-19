@@ -1,12 +1,33 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
 import BottomNavBar from './BottomNavBar';
 
 const Home = () => {
 
   const navigation = useNavigation();
+
+  //get user data from firebase on the base of userId saved in Async Storage
+  const [userFirstName, setUserFirstName] = useState('');
+  const [userLastName, setUserLastName] = useState('');
+  useEffect(() => {
+    getUserDataByUserId()
+  }, [])
+  const getUserDataByUserId = async () => {
+    try {
+      const myId = await AsyncStorage.getItem('USERID')
+      // console.log(myId)
+      const userData = await firestore().collection('users').doc(myId).get();
+      // console.log(userData._data.firstName)
+      // console.log(userData._data.lastName)
+      setUserFirstName(userData._data.firstName)
+      setUserLastName(userData._data.lastName)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <View style={{ flex: 1, }}>
@@ -17,7 +38,7 @@ const Home = () => {
             Welcome Back,
           </Text>
           <Text style={{ color: '#1D1617', fontSize: 24, lineHeight: 36, fontFamily: "Poppins-Bold", }}>
-            Stefani Wong
+            {userFirstName} {userLastName}
           </Text>
         </View>
         {/* BMI (Body Mass Index) */}

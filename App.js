@@ -38,6 +38,8 @@ import Setting from './components/Setting';
 import Achievement from './components/Achievement';
 import BMICalculator from './components/BMICalculator';
 import PrivacyPolicySignUp from './components/PrivacyPolicySignUp';
+import PersonalData from './components/PersonalData';
+import ProgressPhoto from './components/ProgressPhoto';
 
 
 const App = () => {
@@ -88,6 +90,8 @@ const App = () => {
         <Stack.Screen name="Achievement" component={Achievement} options={{ headerShown: false }} />
         <Stack.Screen name="BMICalculator" component={BMICalculator} options={{ headerShown: false }} />
         <Stack.Screen name="PrivacyPolicySignUp" component={PrivacyPolicySignUp} options={{ headerShown: false }} />
+        <Stack.Screen name="PersonalData" component={PersonalData} options={{ headerShown: false }} />
+        <Stack.Screen name="ProgressPhoto" component={ProgressPhoto} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -1,12 +1,45 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
 import BottomNavBar from './BottomNavBar';
+import Loading from './Loading';
 
 const MyProfile = () => {
 
     const navigation = useNavigation();
+
+    //activity loader
+    const [visible, setVisible] = useState(false);
+
+    //get user data from firebase on the base of userId saved in Async Storage
+    const [userFirstName, setUserFirstName] = useState('');
+    const [userLastName, setUserLastName] = useState('');
+    const [userWeight, setUserWeight] = useState('');
+    const [userHeight, setUserHeight] = useState('');
+    const [userDOB, setUserDOB] = useState('');
+    useEffect(() => {
+        getUserDataByUserId()
+    }, [])
+    const getUserDataByUserId = async () => {
+        try {
+            setVisible(true)
+            const myId = await AsyncStorage.getItem('USERID')
+            // console.log(myId)
+            const userData = await firestore().collection('users').doc(myId).get();
+            // console.log(userData._data.firstName)
+            // console.log(userData._data.weight)
+            setUserFirstName(userData._data.firstName)
+            setUserLastName(userData._data.lastName)
+            setUserWeight(userData._data.weight)
+            setUserHeight(userData._data.height)
+            setUserDOB(userData._data.dateOfBirth)
+            setVisible(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff', }}>
@@ -42,7 +75,7 @@ const MyProfile = () => {
                     <View style={{ marginLeft: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flex: 1 }}>
                         <View>
                             <Text style={{ color: '#1D1617', fontSize: 18, fontFamily: "Poppins-SemiBold", }}>
-                                Stefani Wong
+                                {userFirstName} {userLastName}
                             </Text>
                             <Text style={{ color: '#7B6F72', fontSize: 16, fontFamily: "Poppins-Medium", }}>
                                 Lose a Fat Program
@@ -60,7 +93,7 @@ const MyProfile = () => {
                 <View style={{ flexDirection: 'row', marginHorizontal: 25, gap: 15, marginTop: 20, }}>
                     <View style={{ backgroundColor: '#fff', flex: 1, paddingVertical: 10, borderRadius: 16, elevation: 5, }}>
                         <Text style={{ color: '#92A3FD', fontSize: 20, fontFamily: "Poppins-SemiBold", textAlign: 'center' }}>
-                            180 CM
+                            {userWeight} KG
                         </Text>
                         <Text style={{ color: '#1D1617', fontSize: 18, fontFamily: "Poppins-Medium", textAlign: 'center' }}>
                             Weight
@@ -68,7 +101,7 @@ const MyProfile = () => {
                     </View>
                     <View style={{ backgroundColor: '#fff', flex: 1, paddingVertical: 10, borderRadius: 16, elevation: 5, }}>
                         <Text style={{ color: '#92A3FD', fontSize: 20, fontFamily: "Poppins-SemiBold", textAlign: 'center' }}>
-                            65 KG
+                            {userHeight} CM
                         </Text>
                         <Text style={{ color: '#1D1617', fontSize: 18, fontFamily: "Poppins-Medium", textAlign: 'center' }}>
                             Height
@@ -76,10 +109,10 @@ const MyProfile = () => {
                     </View>
                     <View style={{ backgroundColor: '#fff', flex: 1, paddingVertical: 10, borderRadius: 16, elevation: 5, }}>
                         <Text style={{ color: '#92A3FD', fontSize: 20, fontFamily: "Poppins-SemiBold", textAlign: 'center' }}>
-                            22 YO
+                            {userDOB}
                         </Text>
                         <Text style={{ color: '#1D1617', fontSize: 18, fontFamily: "Poppins-Medium", textAlign: 'center' }}>
-                            Age
+                            DOB
                         </Text>
                     </View>
                 </View>
@@ -89,7 +122,8 @@ const MyProfile = () => {
                         <Text style={{ color: '#1D1617', fontSize: 20, fontFamily: "Poppins-Bold", }}>
                             Accounts
                         </Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("PersonalData")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}
@@ -107,7 +141,7 @@ const MyProfile = () => {
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
-                        onPress={() => navigation.navigate("Achievement")}>
+                            onPress={() => navigation.navigate("Achievement")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}
@@ -124,7 +158,8 @@ const MyProfile = () => {
                                 </View>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("ProgressPhoto")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}
@@ -204,7 +239,7 @@ const MyProfile = () => {
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
-                        onPress={() => navigation.navigate("Setting")}>
+                            onPress={() => navigation.navigate("Setting")}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, }}>
                                 <Image
                                     style={{ width: 20, height: 20, resizeMode: 'contain' }}
@@ -228,6 +263,8 @@ const MyProfile = () => {
             <View style={{ position: 'absolute', bottom: 0, width: '100%', }}>
                 <BottomNavBar />
             </View>
+            {/* activity loader */}
+            <Loading visible={visible} />
         </View>
     )
 }

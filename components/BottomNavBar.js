@@ -73,6 +73,7 @@ const BottomNavBar = () => {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate("ProgressPhoto")}
                     style={{ paddingVertical: 25, }}>
                     {
                         cameraBtn ?
