@@ -71,6 +71,7 @@ const Home = () => {
               Today Target
             </Text>
             <TouchableOpacity
+              onPress={() => navigation.navigate("TodayTarget")}
               style={{ backgroundColor: '#92A3FD', paddingVertical: 5, paddingHorizontal: 15, borderRadius: 100, }}
             >
               <Text style={{ color: '#fff', fontSize: 16, lineHeight: 30, fontFamily: "Poppins-Medium", }}>

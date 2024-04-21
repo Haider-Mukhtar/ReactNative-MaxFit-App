@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import Loading from './Loading';
+import BottomNavBar from './BottomNavBar';
 
 const ProgressPhoto = () => {
     return (
@@ -28,6 +29,21 @@ const ProgressPhoto = () => {
                         source={require('../assets/icons/Dots3.png')}
                     />
                 </TouchableOpacity>
+            </View>
+            {/* body */}
+            <View style={{ flex: 1 }}>
+                {/* camera btn */}
+                <TouchableOpacity
+                    style={{ width: 60, height: 60, justifyContent: 'center', alignItems: 'center', backgroundColor: '#C58BF2', borderRadius: 100, bottom: 100, right: 25, position: 'absolute', }}>
+                    <Image
+                        style={{ tintColor: '#fff' }}
+                        source={require('../assets/icons/Camera.png')}
+                    />
+                </TouchableOpacity>
+            </View>
+            {/* bottom nav bar */}
+            <View style={{ position: 'absolute', bottom: 0, width: '100%', }}>
+                <BottomNavBar />
             </View>
         </View>
     )

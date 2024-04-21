@@ -133,7 +133,8 @@ const Login = () => {
         {/* login button */}
         <View style={{ marginHorizontal: 25 }}>
           <TouchableOpacity
-            onPress={loginBtn}
+            // onPress={loginBtn}
+            onPress={() => navigation.navigate("Home")}
             style={{ backgroundColor: '#92A3FD', paddingVertical: 14, borderRadius: 100 }}
           >
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
