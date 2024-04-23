@@ -58,9 +58,11 @@ const MyProfile = () => {
                     </Text>
                 </View>
                 <TouchableOpacity
+                    onPress={getUserDataByUserId}
                     style={{ backgroundColor: '#fff', borderRadius: 6, elevation: 5, height: 36, width: 36, alignItems: 'center', justifyContent: 'center' }}>
                     <Image
-                        source={require('../assets/icons/Dots3.png')}
+                        style={{ width: 26, height: 26, resizeMode: 'contain' }}
+                        source={require('../assets/icons/refresh.png')}
                     />
                 </TouchableOpacity>
             </View>
@@ -108,7 +110,7 @@ const MyProfile = () => {
                         </Text>
                     </View>
                     <View style={{ backgroundColor: '#fff', flex: 1, paddingVertical: 10, borderRadius: 16, elevation: 5, }}>
-                        <Text style={{ color: '#92A3FD', fontSize: 20, fontFamily: "Poppins-SemiBold", textAlign: 'center' }}>
+                        <Text style={{ color: '#92A3FD', fontSize: 18, fontFamily: "Poppins-SemiBold", textAlign: 'center' }}>
                             {userDOB}
                         </Text>
                         <Text style={{ color: '#1D1617', fontSize: 18, fontFamily: "Poppins-Medium", textAlign: 'center' }}>

@@ -41,6 +41,7 @@ import PrivacyPolicySignUp from './components/PrivacyPolicySignUp';
 import PersonalData from './components/PersonalData';
 import ProgressPhoto from './components/ProgressPhoto';
 import TodayTarget from './components/TodayTarget';
+import AddTodayTarget from './components/AddTodayTarget';
 
 
 const App = () => {
@@ -94,6 +95,7 @@ const App = () => {
         <Stack.Screen name="PersonalData" component={PersonalData} options={{ headerShown: false }} />
         <Stack.Screen name="ProgressPhoto" component={ProgressPhoto} options={{ headerShown: false }} />
         <Stack.Screen name="TodayTarget" component={TodayTarget} options={{ headerShown: false }} />
+        <Stack.Screen name="AddTodayTarget" component={AddTodayTarget} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
