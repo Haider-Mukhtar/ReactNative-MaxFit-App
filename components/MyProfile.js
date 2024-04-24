@@ -19,6 +19,7 @@ const MyProfile = () => {
     const [userWeight, setUserWeight] = useState('');
     const [userHeight, setUserHeight] = useState('');
     const [userDOB, setUserDOB] = useState('');
+    const [profileImage, setProfileImage] = useState('')
     useEffect(() => {
         getUserDataByUserId()
     }, [])
@@ -35,6 +36,7 @@ const MyProfile = () => {
             setUserWeight(userData._data.weight)
             setUserHeight(userData._data.height)
             setUserDOB(userData._data.dateOfBirth)
+            setProfileImage(userData._data.profileImage)
             setVisible(false)
         } catch (error) {
             console.log(error)
@@ -70,9 +72,18 @@ const MyProfile = () => {
                 {/* profile */}
                 <View style={{ marginHorizontal: 25, flexDirection: 'row', alignItems: 'center' }}>
                     <View>
-                        <Image
-                            source={require('../assets/images/UserProfilePic.png')}
-                        />
+                        {
+                            profileImage == '' ?
+                                <Image
+                                    style={{ height: 70, width: 70, borderRadius: 50, }}
+                                    source={require('../assets/images/UserProfilePic.png')}
+                                />
+                                :
+                                <Image
+                                    style={{ height: 70, width: 70, borderRadius: 50, }}
+                                    source={{ uri: profileImage }}
+                                />
+                        }
                     </View>
                     <View style={{ marginLeft: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flex: 1 }}>
                         <View>
@@ -84,6 +95,7 @@ const MyProfile = () => {
                             </Text>
                         </View>
                         <TouchableOpacity
+                            onPress={() => navigation.navigate("EditProfile")}
                             style={{ backgroundColor: '#92A3FD', paddingHorizontal: 30, paddingVertical: 6, borderRadius: 100, }}>
                             <Text style={{ color: '#fff', fontSize: 16, fontFamily: "Poppins-Medium", }}>
                                 Edit

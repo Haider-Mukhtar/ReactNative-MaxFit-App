@@ -63,10 +63,10 @@ const Signup = (props) => {
             heartRate: "",
             calories: "",
             sleep: "",
+            profileImage: "",
             // followers: [],
             // following: [],
             // intrest: [],
-            // profileImage: "",
         })
             .then(
                 res => {

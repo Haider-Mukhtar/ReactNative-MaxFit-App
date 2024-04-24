@@ -42,6 +42,7 @@ import PersonalData from './components/PersonalData';
 import ProgressPhoto from './components/ProgressPhoto';
 import TodayTarget from './components/TodayTarget';
 import AddTodayTarget from './components/AddTodayTarget';
+import EditProfile from './components/EditProfile';
 
 
 const App = () => {
@@ -96,6 +97,7 @@ const App = () => {
         <Stack.Screen name="ProgressPhoto" component={ProgressPhoto} options={{ headerShown: false }} />
         <Stack.Screen name="TodayTarget" component={TodayTarget} options={{ headerShown: false }} />
         <Stack.Screen name="AddTodayTarget" component={AddTodayTarget} options={{ headerShown: false }} />
+        <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
