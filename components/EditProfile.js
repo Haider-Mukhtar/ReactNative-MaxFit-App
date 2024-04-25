@@ -151,7 +151,7 @@ const EditProfile = () => {
             {/* body */}
             <View>
                 {/* dp  */}
-                <View style={{ marginHorizontal: 25, marginTop: 20, }}>
+                <View style={{ marginHorizontal: 25, marginTop: 30, }}>
                     <TouchableOpacity
                         onPress={() => setShow1(true)}
                         style={{ backgroundColor: '#92A3FD', paddingVertical: 16, borderRadius: 100 }}
@@ -164,7 +164,7 @@ const EditProfile = () => {
                     </TouchableOpacity>
                 </View>
                 {/* First Name */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', marginHorizontal: 25, borderRadius: 12, marginTop: 50 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F8F8', marginHorizontal: 25, borderRadius: 12, marginTop: 30 }}>
                     <Image
                         style={{ marginHorizontal: 10, width: 25, height: 25, resizeMode: 'contain' }}
                         source={require('../assets/icons/ProfileLogo.png')}
@@ -281,7 +281,7 @@ const EditProfile = () => {
             <Modal transparent={true} visible={show1} animationType='slide'>
                 <View style={{ backgroundColor: 'rgba(0,0,0,0.6)', flex: 1 }}>
                     <View style={{ backgroundColor: '#fff', marginHorizontal: 30, marginVertical: 50, borderRadius: 20, elevation: 3, padding: 14, }}>
-                        <Text style={{ fontSize: 24, fontWeight: 'bold', marginRight: 10, color: '#000', textAlign: "center", marginVertical: 10, fontFamily: 'AirbnbCereal_M', }}>
+                        <Text style={{ color: '#1D1617', fontSize: 24, fontFamily: "Poppins-Bold", textAlign: 'center' }}>
                             Profile Image
                         </Text>
                         {
@@ -296,24 +296,24 @@ const EditProfile = () => {
                             <TouchableOpacity
                                 style={{ backgroundColor: '#55efc4', padding: 16, borderRadius: 14, elevation: 2 }}
                                 onPress={() => openCamera()}>
-                                <Text style={{ fontSize: 18, fontWeight: '600', textAlign: 'center', color: '#000', fontFamily: 'AirbnbCereal_M', }}>Open Camera</Text>
+                                <Text style={{  color: '#1D1617', fontSize: 20, fontFamily: "Poppins-SemiBold", textAlign: 'center'  }}>Open Camera</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ marginTop: 10, }}>
                             <TouchableOpacity
                                 style={{ backgroundColor: '#55efc4', padding: 16, borderRadius: 14, elevation: 2 }}
                                 onPress={() => pickFromGallery()}>
-                                <Text style={{ fontSize: 18, fontWeight: '600', textAlign: 'center', color: '#000', fontFamily: 'AirbnbCereal_M', }}>Pick from Gallery</Text>
+                                <Text style={{ color: '#1D1617', fontSize: 20, fontFamily: "Poppins-SemiBold", textAlign: 'center'  }}>Pick from Gallery</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, gap: 10, }}>
                             <TouchableOpacity style={{ backgroundColor: '#fab1a0', flex: 1, padding: 16, borderRadius: 14, elevation: 2 }}
                                 onPress={() => { setShow1(false), setProfileImageData(null) }}>
-                                <Text style={{ fontSize: 18, fontWeight: '600', textAlign: 'center', color: '#000', fontFamily: 'AirbnbCereal_M', }}>Cancel</Text>
+                                <Text style={{  color: '#fff', fontSize: 20, fontFamily: "Poppins-SemiBold", textAlign: 'center'  }}>Cancel</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ backgroundColor: '#74b9ff', flex: 1, padding: 16, borderRadius: 14, elevation: 2 }}
+                            <TouchableOpacity style={{ backgroundColor: '#92A3FD', flex: 1, padding: 16, borderRadius: 14, elevation: 2 }}
                                 onPress={uploadProfileImage}>
-                                <Text style={{ fontSize: 18, fontWeight: '600', textAlign: 'center', color: '#000', fontFamily: 'AirbnbCereal_M', }}>Upload</Text>
+                                <Text style={{  color: '#fff', fontSize: 20, fontFamily: "Poppins-SemiBold", textAlign: 'center' }}>Upload</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

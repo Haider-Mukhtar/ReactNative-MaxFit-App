@@ -12,6 +12,7 @@ const Home = () => {
   //get user data from firebase on the base of userId saved in Async Storage
   const [userFirstName, setUserFirstName] = useState('');
   const [userLastName, setUserLastName] = useState('');
+  const [profileImage, setProfileImage] = useState('')
   useEffect(() => {
     getUserDataByUserId()
   }, [])
@@ -24,6 +25,7 @@ const Home = () => {
       // console.log(userData._data.lastName)
       setUserFirstName(userData._data.firstName)
       setUserLastName(userData._data.lastName)
+      setProfileImage(userData._data.profileImage)
     } catch (error) {
       console.log(error)
     }
@@ -33,13 +35,27 @@ const Home = () => {
     <View style={{ flex: 1, }}>
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: '#fff' }}>
         {/* header */}
-        <View style={{ marginTop: 20, marginHorizontal: 25, }}>
-          <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 24, fontFamily: "Poppins-Medium", }}>
-            Welcome Back,
-          </Text>
-          <Text style={{ color: '#1D1617', fontSize: 24, lineHeight: 36, fontFamily: "Poppins-Bold", }}>
-            {userFirstName} {userLastName}
-          </Text>
+        <View style={{ marginTop: 20, marginHorizontal: 25, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View>
+            <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 24, fontFamily: "Poppins-Medium", }}>
+              Welcome Back,
+            </Text>
+            <Text style={{ color: '#1D1617', fontSize: 24, lineHeight: 36, fontFamily: "Poppins-Bold", }}>
+              {userFirstName} {userLastName}
+            </Text>
+          </View>
+          {
+            profileImage == '' ?
+              <Image
+                style={{ height: 60, width: 60, borderRadius: 50, }}
+                source={require('../assets/images/UserProfilePic.png')}
+              />
+              :
+              <Image
+                style={{ height: 60, width: 60, borderRadius: 50, }}
+                source={{ uri: profileImage }}
+              />
+          }
         </View>
         {/* BMI (Body Mass Index) */}
         <View style={{ marginTop: 20, marginHorizontal: 25, }}>
