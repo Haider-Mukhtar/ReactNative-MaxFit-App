@@ -53,21 +53,31 @@ const ProgressPhoto = () => {
         const url = await storage().ref(photoData.assets[0].fileName).getDownloadURL();
         //add it in firestore
         try {
-            const userId = await AsyncStorage.getItem('USERID')
-            if (url != '') {
+            if (url !== '') {
+                const userId = await AsyncStorage.getItem('USERID');
                 const userData = await firestore().collection('users').doc(userId).get();
-                // console.log(userData._data.firstName,userData._data.lastName)
-                setPhotoOwnerName(userData._data.firstName, userData._data.lastName)
-                firestore().collection('photos').doc(photoId).set({
-                    photoId: photoId,
-                    photo: url,
-                    photoOwnerId: userId,
-                    photoOwnerName: photoOwnerName,
-                    photoTitle: photoTitle,
-                })
+                if (userData.exists && userData.data().firstName && userData.data().lastName) {
+                    const photoOwnerName = `${userData.data().firstName} ${userData.data().lastName}`;
+                    setPhotoOwnerName(photoOwnerName);
+                    firestore().collection('photos').doc(photoId).set({
+                        photoId,
+                        photo: url,
+                        photoOwnerId: userId,
+                        photoOwnerName,
+                        photoTitle,
+                    });
+                } else {
+                    console.warn('Failed to retrieve owner name. Uploading photo without name.');
+                    firestore().collection('photos').doc(photoId).set({
+                        photoId,
+                        photo: url,
+                        photoOwnerId: userId,
+                        photoTitle,
+                    });
+                }
             }
         } catch (error) {
-            console.log(error)
+            console.error('Error uploading photo:', error);
         }
         setPhotoData(null)
         clearData()
@@ -122,9 +132,11 @@ const ProgressPhoto = () => {
                     </Text>
                 </View>
                 <TouchableOpacity
+                    onPress={getPhotos}
                     style={{ backgroundColor: '#fff', borderRadius: 6, elevation: 5, height: 36, width: 36, alignItems: 'center', justifyContent: 'center' }}>
                     <Image
-                        source={require('../assets/icons/Dots3.png')}
+                        style={{ width: 26, height: 26, resizeMode: 'contain' }}
+                        source={require('../assets/icons/refresh.png')}
                     />
                 </TouchableOpacity>
             </View>
@@ -132,11 +144,27 @@ const ProgressPhoto = () => {
             <View style={{ flex: 1 }}>
                 {/* body */}
                 <FlatList
-                    numColumns={2}
                     data={allPhoto}
                     renderItem={({ item }) =>
-                        <View style={{ backgroundColor: 'red', flex: 1 }}>
-                            <Text>{item.photoTitle}</Text>
+                        <View style={{ flex: 1, marginHorizontal: 25, }}>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate("PhotoDetails", { item: item })}
+                                style={{ flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#d6deea', padding: 10, marginBottom: 10, borderRadius: 12, elevation: 5 }}>
+                                <View>
+                                    <Image
+                                        style={{ height: 120, width: 120, borderRadius: 12, }}
+                                        source={{ uri: item.photo }}
+                                    />
+                                </View>
+                                <View>
+                                    <Text style={{ color: '#1D1617', fontSize: 22, fontFamily: "Poppins-SemiBold", }}>
+                                        {item.photoTitle}
+                                    </Text>
+                                    <Text style={{ color: '#1D1617', fontSize: 22, fontFamily: "Poppins-Medium", }}>
+                                        From: {item.photoOwnerName}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     }
                 />
@@ -156,7 +184,7 @@ const ProgressPhoto = () => {
             </View>
             {/* activity loader */}
             <Loading visible={visible} />
-            {/* dp modal  */}
+            {/* photo modal  */}
             <Modal transparent={true} visible={show1} animationType='slide'>
                 <View style={{ backgroundColor: 'rgba(0,0,0,0.6)', flex: 1 }}>
                     <View style={{ backgroundColor: '#fff', marginHorizontal: 30, marginVertical: 50, borderRadius: 20, elevation: 3, padding: 14, }}>
@@ -214,7 +242,7 @@ const ProgressPhoto = () => {
                     </View>
                 </View>
             </Modal>
-        </View>
+        </View >
     )
 }
 
