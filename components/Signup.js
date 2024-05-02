@@ -82,6 +82,15 @@ const Signup = (props) => {
             });
     }
 
+    //toasts
+    const showToast = () => {
+        Toast.show({
+            type: 'success',
+            text1: 'Hello',
+            text2: 'This is some something 👋'
+        });
+    }
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             {/* header */}
@@ -222,6 +231,7 @@ const Signup = (props) => {
                 {/* facebook , google btns */}
                 <View style={{ flexDirection: 'row', gap: 40, justifyContent: 'center', }}>
                     <TouchableOpacity
+                        onPress={() => console.warn("Feature not available.")}
                         style={{ width: 50, height: 50, borderRadius: 12, borderWidth: 1, borderColor: '#DDDADA', justifyContent: 'center', alignItems: 'center' }}
                     >
                         <Image
@@ -230,6 +240,7 @@ const Signup = (props) => {
                         />
                     </TouchableOpacity>
                     <TouchableOpacity
+                        onPress={() => console.warn("Feature not available.")}
                         style={{ width: 50, height: 50, borderRadius: 12, borderWidth: 1, borderColor: '#DDDADA', justifyContent: 'center', alignItems: 'center' }}
                     >
                         <Image

@@ -67,6 +67,7 @@ const BottomNavBar = () => {
 
                 </TouchableOpacity>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate("ChatAI")}
                     style={{ backgroundColor: '#92A3FD', borderRadius: 100, padding: 20, alignSelf: 'center', marginTop: -50 }}>
                     <Image
                         source={require('../assets/icons/Search.png')}

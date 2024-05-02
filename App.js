@@ -44,6 +44,8 @@ import TodayTarget from './components/TodayTarget';
 import AddTodayTarget from './components/AddTodayTarget';
 import EditProfile from './components/EditProfile';
 import PhotoDetails from './components/PhotoDetails';
+import ForgotPassword from './components/ForgotPassword';
+import ChatAI from './components/ChatAI';
 
 
 const App = () => {
@@ -100,6 +102,8 @@ const App = () => {
         <Stack.Screen name="AddTodayTarget" component={AddTodayTarget} options={{ headerShown: false }} />
         <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
         <Stack.Screen name="PhotoDetails" component={PhotoDetails} options={{ headerShown: false }} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
+        <Stack.Screen name="ChatAI" component={ChatAI} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -1,19 +1,42 @@
 import { FlatList, StyleSheet, Text, View, Animated, useWindowDimensions, Image } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import slides from '../assets/onboardingData/slides'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import AppIntroSlider from 'react-native-app-intro-slider'
+import { useNavigation } from '@react-navigation/native';
 import Login from './Login'
+import Loading from './Loading'
 
 const Onboarding = () => {
 
     const { width, height } = useWindowDimensions();
 
+    const navigation = useNavigation();
+
     const [showLoginPage, setShowLoginPage] = useState(false)
+
+    //activity loader
+    const [visible, setVisible] = useState(false);
+
+    //login info , check login or not
+    useEffect(() => {
+        setVisible(true)
+        checkLogin();
+    }, [])
+    const checkLogin = async () => {
+        const id = await AsyncStorage.getItem('USERID')
+        if (id !== null) {
+            navigation.navigate("Home")
+            setVisible(false)
+        } else {
+            setVisible(false)
+            navigation.navigate("Onboarding")
+        }
+    }
 
     const buttonLable = (lable) => {
         return (
-            <View style={{ padding: 10,}}>
+            <View style={{ padding: 10, }}>
                 <Text style={{ color: "#1D1617", fontSize: 20, fontFamily: "Poppins-Bold", }}>
                     {lable}
                 </Text>
@@ -61,6 +84,8 @@ const Onboarding = () => {
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <Login />
+            {/* activity loader */}
+            <Loading visible={visible} />
         </View>
     )
 }

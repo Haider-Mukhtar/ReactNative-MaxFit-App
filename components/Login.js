@@ -122,7 +122,8 @@ const Login = () => {
       {passwordError ? <Text style={styles.error}>Please enter password.</Text> : null}
       {/* forgot password */}
       <View style={{ marginTop: 16 }}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => console.warn("Feature not available.")}>
           <Text style={{ color: '#ADA4A5', fontSize: 16, lineHeight: 36, fontFamily: "Poppins-Medium", textAlign: 'center', textDecorationLine: 'underline' }}>
             Forgot your password?
           </Text>
@@ -158,6 +159,7 @@ const Login = () => {
         {/* facebook , google btns */}
         <View style={{ flexDirection: 'row', gap: 40, justifyContent: 'center', }}>
           <TouchableOpacity
+            onPress={() => console.warn("Feature not available.")}
             style={{ width: 50, height: 50, borderRadius: 12, borderWidth: 1, borderColor: '#DDDADA', justifyContent: 'center', alignItems: 'center' }}
           >
             <Image
@@ -166,6 +168,7 @@ const Login = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => console.warn("Feature not available.")}
             style={{ width: 50, height: 50, borderRadius: 12, borderWidth: 1, borderColor: '#DDDADA', justifyContent: 'center', alignItems: 'center' }}
           >
             <Image
