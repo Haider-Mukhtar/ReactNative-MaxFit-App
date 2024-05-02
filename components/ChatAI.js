@@ -12,8 +12,7 @@ const ChatAI = () => {
     const navigation = useNavigation();
 
     const [data, setData] = useState([]);
-    const apiKey = 'sk-proj-YvmuUxt8LNhnkZBmIiHXT3BlbkFJf9eFmbwXl2Gp6n6Ko1W0'
-    const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-002/completions'
+    
     const [textInput, setTextInput] = useState('');
 
     const handleSend = async () => {
