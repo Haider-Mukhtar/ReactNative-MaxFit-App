@@ -89,7 +89,7 @@ To learn more about React Native, take a look at the following resources:
 
 # Authors
 
-- [@Haider Mukhtar](https://github.com/Haider-Mukhtar)
+
 - [@Abdul Hannan](https://github.com/MrabdulHannan1)
 
 
